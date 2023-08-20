@@ -1,0 +1,46 @@
+  -- 각 부서의 이름(department_name)과 해당 부서의 평균 급여(avg_salary) 조회하기
+  SELECT d.d
+  
+  --4. 각 부서의  이름과 해당 부서의 최대 급여(max_salary) 조회하기
+ /* SELECT d.department_name, MAX(e.salary) AS Max_Salary
+  FROM departments d 
+  JOIN employees e ON d.department_id = e.department_id
+  GROUP BY d.deparment_name
+  */
+--5. 각 직원의 성(last_name)과 해당 직원이 속한 부서의 최소 급여(min_salary) 조회하기
+/*SELECT oe.last_name, od.Min_Salary
+FROM  employees oe
+JOIN (
+    SELECT d.department_id, MIN(e.salary) AS Min_Salary
+    FROM departments d 
+    JOIN employees e ON d.deparment_id = e,department_id
+    GROUP BY d.department_id
+    ) od
+ON oe.department_id = od.department_id
+;*/
+
+
+--7. 각 직원의 성(last_name)과 해당 직원의 매니저의 성(last_name) 및 부서 이름(department_name) 조회하기
+/*SELECT e.last_name, m.last_name, d.department_name
+FROM employees e 
+JOIN employees m ON e.manager_id = m.employee_id
+JOIN departments d ON e.department_id = d.department_id;*/
+
+
+--10. 직원들 중에서 급여(salary)가 10000 이상인 직원들의 성(last_name)과 해당 직원의 부서 이름(department_name)조회하기
+/*SELECT e.last_name, d.department_name
+FROM employees e
+JOIN departmens d ON e.department_id = d.deparment_id 
+WHERE e.salary >= 10000
+ORDER BY e.salary DESC
+;*/
+
+11.
+SELECT d.department_name, d.manager_id, m.last_name
+FROM departments d 
+JOIN employees m ON d.manager_id = m.employee_id 
+
+
+
+
+

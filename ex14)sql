@@ -1,0 +1,49 @@
+--부모테이블 dept5를 참조하는 자식테이블
+
+DROP TABLE emp;
+CREATE TABLE emp(
+    empno NUMBER(4) PRIMARY KEY,
+    ename VARCHAR2(15) NOT NULL,
+    deptno NUMBER(2)_,
+CONSTRAINT emp_dept5_fk FOREIGN KEY (deptno)
+    REFERENCES dept5(deptno)
+    );
+    
+SELECT * FROM dept5;
+
+INSERT INFO dept5 (deptno, dname) VALUES (1, '개발부');
+INSERT INFO dept5 (deptno, dname) VALUES (2, '기획부');
+INSERT INFO dept5 (deptno, dname) VALUES (3, '디자인');
+
+COMMIT;
+
+SELECT * FROM emp;
+
+INSERT INTO emp (empno, ename, deptno) VALUES (1, '안준호', 1);
+INSERT INTO emp (empno, ename, deptno) VALUES (2, '조석봉', 3);
+
+COMMIT;
+
+DELETE FROM emp WHERE empno = 2;
+ROLLBACK;
+
+DELETE FROM dept5 WHERE deptno = 1;
+
+SELECT * FROM user_constraints
+WHERE constraint_name = 'EMP_DEPT5_FK'
+;
+
+SELECT * FROM user_constraints
+WHERE table_name = 'EMP';
+
+--제약조건은 수정 불가능, 삭제만 가능합니다.
+ALTER TABLE emp DROP CONSTRAINTS EMP_DEPT5_FK;
+
+--제약조건 추가하기
+ALTER TABLE emp ADD(
+    CONSTRAINT emp_dept5_fk FOREIGN KEY(deptno) REFERENCES dept5(deptno)
+    );
+    
+SELECT * FROM user_constraints
+WHERE constraint_name = 'SYS_c008366'
+;
